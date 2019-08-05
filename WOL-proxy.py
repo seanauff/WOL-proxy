@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import re
 import paho.mqtt.client as mqtt
 from wakeonlan import send_magic_packet
 
@@ -25,8 +26,11 @@ def on_connect(client, userdata, flags, rc):
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
-    send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
-    print(f"Magic packet sent to {message.payload}.")
+    if re.match("[0-9a-f]{2}([-:\.]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$", message.payload.lower()):
+        send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
+        print(f"Magic packet sent to {message.payload}.")
+    else:
+        print(f"Message recieved with invalid format: {message.payload}")
 
 # set up mqtt client
 client = mqtt.Client(client_id=MQTT_CLIENT_ID)
