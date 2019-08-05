@@ -2,10 +2,6 @@
 import os
 import paho.mqtt.client as mqtt
 
-# The callback for when the client receives a CONNACK response from the server.
-def on_connect(client, userdata, flags, rc):
-    print("Connected with result code "+str(rc))
-
 # read in needed env variables
 MQTT_BROKER_HOST  = os.environ['MQTT_BROKER_HOST']
 MQTT_BROKER_PORT  = os.environ['MQTT_BROKER_PORT']
@@ -14,6 +10,10 @@ MQTT_USERNAME     = os.environ['MQTT_USERNAME']
 MQTT_PASSWORD     = os.environ['MQTT_PASSWORD']
 MQTT_TOPIC_PREFIX = os.environ['MQTT_TOPIC_PREFIX']
 
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
+    
 # set up mqtt client
 client = mqtt.Client(client_id=MQTT_CLIENT_ID)
 if MQTT_USERNAME and MQTT_PASSWORD:
