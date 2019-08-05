@@ -30,3 +30,6 @@ client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 # subscribe to command topic
 client.subscribe(MQTT_TOPIC_PREFIX+"/command")
 
+# callback for when the client receives a message on the subcribed topic
+def on_message(client, userdata, message):
+    
