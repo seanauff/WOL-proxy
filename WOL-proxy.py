@@ -39,5 +39,5 @@ client.subscribe(MQTT_TOPIC_PREFIX+"/command")
 print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\".")
 
 # start loop
-client.loop_start()
+client.loop_forever()
 print(f"Wake-On-LAN proxy service started.")
