@@ -40,4 +40,4 @@ print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\".")
 
 # start loop
 client.loop_start()
-print(f"Starting loop.")
+print(f"Wake-On-LAN proxy service started.")
