@@ -28,7 +28,7 @@ client.on_connect = on_connect # on connect callback
 client.on_message = on_message # on message callback
 
 # connect to broker
-client.connect(MQTT_BROKER_HOST, port=MQTT_BROKER_PORT)
+client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
 client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 
 # subscribe to command topic
