@@ -16,6 +16,10 @@ WOL_BROADCAST_ADDR = os.environ['WOL_BROADCAST_ADDR']
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
+# callback for when the client receives a message on the subscribed topic
+def on_message(client, userdata, message):
+    send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
+
 # set up mqtt client
 client = mqtt.Client(client_id=MQTT_CLIENT_ID)
 if MQTT_USERNAME and MQTT_PASSWORD:
@@ -29,10 +33,6 @@ client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 
 # subscribe to command topic
 client.subscribe(MQTT_TOPIC_PREFIX+"/command")
-
-# callback for when the client receives a message on the subscribed topic
-def on_message(client, userdata, message):
-    send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
 
 # start loop
 client.loop_start()
