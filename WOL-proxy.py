@@ -15,12 +15,12 @@ print("All env vars read.")
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
-    print(f"Connected with result code {rc}")
+    print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}.")
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
     send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
-    print(f"Magic packet sent to {message.payload}")
+    print(f"Magic packet sent to {message.payload}.")
 
 # set up mqtt client
 client = mqtt.Client(client_id=MQTT_CLIENT_ID)
@@ -33,11 +33,10 @@ client.on_message = on_message # on message callback
 # connect to broker
 client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
 client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
-print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT}")
 
 # subscribe to command topic
 client.subscribe(MQTT_TOPIC_PREFIX+"/command")
-print(f"Subcribed to commands on topic {MQTT_TOPIC_PREFIX}/command")
+print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\".")
 
 # start loop
 client.loop_start()
