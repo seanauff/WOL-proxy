@@ -16,6 +16,7 @@ print("All env vars read.")
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
     print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}.")
+    client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
@@ -32,7 +33,6 @@ client.on_message = on_message # on message callback
 
 # connect to broker
 client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
-client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 
 # subscribe to command topic
 client.subscribe(MQTT_TOPIC_PREFIX+"/command")
