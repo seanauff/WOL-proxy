@@ -31,7 +31,7 @@ def on_subscribe(client, userdata, mid, granted_qos):
 
 def on_disconnect(client, userdata, rc):
     if rc != 0:
-        print("Unexpected disconnection from broker (RC={rc}). Attempting to reconnect...")
+        print(f"Unexpected disconnection from broker (RC={rc}). Attempting to reconnect...")
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
