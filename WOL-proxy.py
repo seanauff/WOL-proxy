@@ -27,6 +27,10 @@ def on_connect(client, userdata, flags, rc):
 
     print(f"Wake-On-LAN proxy service started.")    
 
+def on_disconnect(client, userdata, rc):
+    if rc != 0:
+        print("Unexpected disconnection from broker. Attempting to reconnect.")
+
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
     if re.match(r"[0-9a-f]{2}([-:\.]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$", message.payload.lower()):
@@ -42,6 +46,7 @@ if MQTT_USERNAME and MQTT_PASSWORD:
     print("Username and password set.")
 client.on_connect = on_connect # on connect callback
 client.on_message = on_message # on message callback
+client.on_disconnect = on_disconnect # on disconnect callback
 
 # connect to broker
 client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
