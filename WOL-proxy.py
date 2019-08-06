@@ -5,14 +5,14 @@ import paho.mqtt.client as mqtt
 from wakeonlan import send_magic_packet
 
 # read in needed env variables
-MQTT_BROKER_HOST   = os.environ['MQTT_BROKER_HOST']
-MQTT_BROKER_PORT   = os.environ['MQTT_BROKER_PORT']
-MQTT_CLIENT_ID     = os.environ['MQTT_CLIENT_ID']
-MQTT_USERNAME      = os.environ['MQTT_USERNAME']
-MQTT_PASSWORD      = os.environ['MQTT_PASSWORD']
-MQTT_TOPIC_PREFIX  = os.environ['MQTT_TOPIC_PREFIX']
-MQTT_QOS           = os.environ['MQTT_QOS']
-WOL_BROADCAST_ADDR = os.environ['WOL_BROADCAST_ADDR']
+MQTT_BROKER_HOST   = os.getenv('MQTT_BROKER_HOST',"127.0.0.1")
+MQTT_BROKER_PORT   = os.getenv('MQTT_BROKER_PORT',1883)
+MQTT_CLIENT_ID     = os.getenv('MQTT_CLIENT_ID',"WOL-proxy")
+MQTT_USERNAME      = os.getenv('MQTT_USERNAME',"")
+MQTT_PASSWORD      = os.getenv('MQTT_PASSWORD',"")
+MQTT_TOPIC_PREFIX  = os.getenv('MQTT_TOPIC_PREFIX',"WOL-proxy")
+MQTT_QOS           = os.getenv('MQTT_QOS',1)
+WOL_BROADCAST_ADDR = os.getenv('WOL_BROADCAST_ADDR',"255.255.255.255")
 #print("All env vars read.")
 
 # The callback for when the client receives a CONNACK response from the server.
