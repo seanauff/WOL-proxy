@@ -27,7 +27,7 @@ def on_connect(client, userdata, flags, rc):
     print(f"Wake-On-LAN proxy service started.")    
 
 def on_subscribe(client, userdata, mid, granted_qos):
-    print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {granted_qos}.")
+    print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {granted_qos[0]}.")
 
 def on_disconnect(client, userdata, rc):
     if rc != 0:
