@@ -7,7 +7,6 @@ from wakeonlan import send_magic_packet
 # read in needed env variables
 MQTT_BROKER_HOST   = os.environ['MQTT_BROKER_HOST']
 MQTT_BROKER_PORT   = os.environ['MQTT_BROKER_PORT']
-MQTT_PROTOCOL      = os.environ['MQTT_PROTOCOL']
 MQTT_CLIENT_ID     = os.environ['MQTT_CLIENT_ID']
 MQTT_USERNAME      = os.environ['MQTT_USERNAME']
 MQTT_PASSWORD      = os.environ['MQTT_PASSWORD']
@@ -43,7 +42,7 @@ def on_message(client, userdata, message):
         print(f"Message recieved with invalid format: {message.payload}")
 
 # set up mqtt client
-client = mqtt.Client(client_id=MQTT_CLIENT_ID, protocol=MQTT_PROTOCOL)
+client = mqtt.Client(client_id=MQTT_CLIENT_ID)
 if MQTT_USERNAME and MQTT_PASSWORD:
     client.username_pw_set(MQTT_USERNAME,MQTT_PASSWORD)
     print("Username and password set.")
