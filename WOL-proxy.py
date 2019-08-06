@@ -23,9 +23,11 @@ def on_connect(client, userdata, flags, rc):
 
     # subscribe to command topic
     client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=int(MQTT_QOS))
-    print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\".")
 
     print(f"Wake-On-LAN proxy service started.")    
+
+def on_subscribe(client, userdata, mid, granted_qos)
+    print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {granted_qos}.")
 
 def on_disconnect(client, userdata, rc):
     if rc != 0:
@@ -47,6 +49,7 @@ if MQTT_USERNAME and MQTT_PASSWORD:
 client.on_connect = on_connect # on connect callback
 client.on_message = on_message # on message callback
 client.on_disconnect = on_disconnect # on disconnect callback
+client.on_subscribe = on_subscribe # on subscribe callback
 
 # connect to broker
 client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
