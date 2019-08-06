@@ -17,7 +17,7 @@ WOL_BROADCAST_ADDR = os.getenv('WOL_BROADCAST_ADDR',"255.255.255.255")
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
-    print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}.")
+    print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}: "+mqtt.connack_string(rc))
 
     client.publish(MQTT_TOPIC_PREFIX+"/status",payload="Online",qos=1,retain=True)
 
