@@ -19,7 +19,7 @@ WOL_BROADCAST_ADDR = os.environ['WOL_BROADCAST_ADDR']
 def on_connect(client, userdata, flags, rc):
     print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}.")
 
-    client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
+    client.publish(MQTT_TOPIC_PREFIX+"/status",payload="Online",qos=1,retain=True)
 
     # subscribe to command topic
     client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=int(MQTT_QOS))
@@ -46,6 +46,7 @@ client = mqtt.Client(client_id=MQTT_CLIENT_ID)
 if MQTT_USERNAME and MQTT_PASSWORD:
     client.username_pw_set(MQTT_USERNAME,MQTT_PASSWORD)
     print("Username and password set.")
+client.will_set(MQTT_TOPIC_PREFIX+"/status", payload="Offline", qos=1, retain=True)    
 client.on_connect = on_connect # on connect callback
 client.on_message = on_message # on message callback
 client.on_disconnect = on_disconnect # on disconnect callback
