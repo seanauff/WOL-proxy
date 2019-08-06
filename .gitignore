@@ -1,2 +1,3 @@
 .vscode
 paho_mqtt_test.py
+wake_on_lan_test.py
