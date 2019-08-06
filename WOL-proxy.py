@@ -6,12 +6,12 @@ from wakeonlan import send_magic_packet
 
 # read in needed env variables
 MQTT_BROKER_HOST   = os.getenv('MQTT_BROKER_HOST',"127.0.0.1")
-MQTT_BROKER_PORT   = os.getenv('MQTT_BROKER_PORT',1883)
+MQTT_BROKER_PORT   = int(os.getenv('MQTT_BROKER_PORT',1883))
 MQTT_CLIENT_ID     = os.getenv('MQTT_CLIENT_ID',"WOL-proxy")
 MQTT_USERNAME      = os.getenv('MQTT_USERNAME',"")
 MQTT_PASSWORD      = os.getenv('MQTT_PASSWORD',"")
 MQTT_TOPIC_PREFIX  = os.getenv('MQTT_TOPIC_PREFIX',"WOL-proxy")
-MQTT_QOS           = os.getenv('MQTT_QOS',1)
+MQTT_QOS           = int(os.getenv('MQTT_QOS',1))
 WOL_BROADCAST_ADDR = os.getenv('WOL_BROADCAST_ADDR',"255.255.255.255")
 #print("All env vars read.")
 
@@ -22,7 +22,7 @@ def on_connect(client, userdata, flags, rc):
     client.publish(MQTT_TOPIC_PREFIX+"/status",payload="Online",qos=1,retain=True)
 
     # subscribe to command topic
-    client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=int(MQTT_QOS))
+    client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=MQTT_QOS)
 
     print(f"Wake-On-LAN proxy service started.")    
 
@@ -53,7 +53,7 @@ client.on_disconnect = on_disconnect # on disconnect callback
 client.on_subscribe = on_subscribe # on subscribe callback
 
 # connect to broker
-client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
+client.connect(MQTT_BROKER_HOST, port=MQTT_BROKER_PORT)
 
 # start loop
 client.loop_forever()
