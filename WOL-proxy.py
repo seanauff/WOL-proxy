@@ -22,12 +22,11 @@ def on_connect(client, userdata, flags, rc):
     client.publish(MQTT_TOPIC_PREFIX+"/status",payload="Online",qos=1,retain=True)
 
     # subscribe to command topic
-    client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=MQTT_QOS)
-
-    print(f"Wake-On-LAN proxy service started.")    
+    client.subscribe(MQTT_TOPIC_PREFIX+"/command", MQTT_QOS)
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {granted_qos[0]}.")
+    print(f"Wake-On-LAN proxy service started.")  
 
 def on_disconnect(client, userdata, rc):
     if rc != 0:
@@ -35,11 +34,13 @@ def on_disconnect(client, userdata, rc):
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
-    if re.match(r"[0-9a-f]{2}([-:\.]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$", message.payload.lower()):
+    message.payload = message.payload.decode("utf-8")
+    print(f"Message received with payload {message.payload}")
+    if re.match(r"[0-9a-f]{2}([-:\.]?)[0-9a-f]{2}(\1[0-9a-f]{2}){4}$", str(message.payload).lower()):
         send_magic_packet(message.payload,ip_address=WOL_BROADCAST_ADDR)
         print(f"Magic packet sent to {message.payload}.")
     else:
-        print(f"Message recieved with invalid format: {message.payload}")
+        print(f"Message payload has invalid format!")
 
 # set up mqtt client
 client = mqtt.Client(client_id=MQTT_CLIENT_ID)
