@@ -11,6 +11,7 @@ MQTT_CLIENT_ID     = os.environ['MQTT_CLIENT_ID']
 MQTT_USERNAME      = os.environ['MQTT_USERNAME']
 MQTT_PASSWORD      = os.environ['MQTT_PASSWORD']
 MQTT_TOPIC_PREFIX  = os.environ['MQTT_TOPIC_PREFIX']
+MQTT_QOS           = os.environ['MQTT_QOS']
 WOL_BROADCAST_ADDR = os.environ['WOL_BROADCAST_ADDR']
 #print("All env vars read.")
 
@@ -21,8 +22,10 @@ def on_connect(client, userdata, flags, rc):
     client.publish(MQTT_TOPIC_PREFIX+"/status","Online")
 
     # subscribe to command topic
-    client.subscribe(MQTT_TOPIC_PREFIX+"/command")
+    client.subscribe(MQTT_TOPIC_PREFIX+"/command", qos=int(MQTT_QOS))
     print(f"Subcribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\".")
+
+    print(f"Wake-On-LAN proxy service started.")    
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
@@ -45,4 +48,3 @@ client.connect(MQTT_BROKER_HOST, port=int(MQTT_BROKER_PORT))
 
 # start loop
 client.loop_forever()
-print(f"Wake-On-LAN proxy service started.")
