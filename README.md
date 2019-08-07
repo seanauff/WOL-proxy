@@ -43,7 +43,7 @@ Clone the repository and build the image:
 
 ```shell
 git clone https://github.com/seanauff/WOL-proxy.git
-docker build -t seanauff/wol-proxy:[tag] WOL-proxy
+docker build -t seanauff/wol-proxy WOL-proxy
 ```
 
 ## Other Install Methods
