@@ -45,3 +45,18 @@ Clone the repository and build the image:
 git clone https://github.com/seanauff/WOL-proxy.git
 docker build -t seanauff/wol-proxy:[tag] WOL-proxy
 ```
+
+## Other Install Methods
+
+### Dependencies
+
+This project uses the following libraries:
+
+* `paho-mqtt`
+* `wakeonlan`
+
+Install them with:
+
+```shell
+pip install paho-mqtt wakeonlan
+```
