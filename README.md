@@ -52,8 +52,8 @@ docker build -t seanauff/wol-proxy:[tag] WOL-proxy
 
 This project uses the following libraries:
 
-* `paho-mqtt`
-* `wakeonlan`
+* [paho-mqtt](https://pypi.org/project/paho-mqtt/)
+* [wakeonlan](https://pypi.org/project/wakeonlan/)
 
 Install them with:
 
