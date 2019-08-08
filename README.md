@@ -20,6 +20,10 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
   * abcdef012345
 
+### Status Messages
+
+WOL-proxy will report its status on the `[MQTT_TOPIC_PREFIX]/status` topic via retained messages. WOL-Proxy reports `Online` once it connects to the broker. Upon disconnect, the broker will report `Offline`.
+
 ## Running via Docker
 
 Pull the image. If using raspberry pi or similar use `arm` in place of `[tag]`. The `latest` tag will pull the `amd64` image:
