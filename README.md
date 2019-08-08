@@ -6,7 +6,7 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
 ## Running via Docker
 
-Pull the image using either `amd64` or `arm` in place of `[tag]`:
+Pull the image. If using raspberry pi or similar use `arm` in place of `[tag]`. The `latest` tag will pull the `amd64` image:
 
 ```shell
 docker pull seanauff/wol-proxy:[tag]
