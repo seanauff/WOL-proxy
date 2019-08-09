@@ -12,6 +12,14 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
 3. Publish to the mqtt topic, `WOL-proxy/command`, with the MAC address of the computer you wish to wake. The following formats are acceptable: `ab-cd-ef-01-23-45`, `ab:cd:ef:01:23:45`, `ab.cd.ef.01.23.45`, `abcdef012345`.
 
+   By default, WOL-proxy accepts messages on the `WOL-proxy/command` mqtt topic. The `WOL-proxy` prefix can be changed by setting the `MQTT_TOPIC_PREFIX` environment variable. WOL-proxy will then listen for messages on `[MQTT_TOPIC_PREFIX]/command`. Note that adding a trailing `/` to `MQTT_TOPIC_PREFIX` will create an empty level.
+
+   |Value of MQTT_TOPIC_PREFIX|mqtt output topic|
+   |--------------------------|-----------------|
+   |`WOL-proxy`                |`WOL-proxy/output`|
+   |`switches/remoteLAN`          |`switches/remoteLAN/output`|
+   |`switches/remoteLAN/`         |`switches/remoteLAN//output`|
+
 ### Status Messages
 
 WOL-proxy will report its status on the `[MQTT_TOPIC_PREFIX]/status` topic via retained messages. WOL-Proxy reports `Online` once it connects to the broker. Upon disconnect, the broker will report `Offline`.
