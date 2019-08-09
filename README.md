@@ -44,7 +44,7 @@ Start the container with modified environment variables:
 docker run -d --net=host --name=metermon -e MQTT_BROKER_HOST=[host] -e WOL_BROADCAST_ADDR=[broadcast] seanauff/wol-proxy:[tag]
 ```
 
-*Note:* Container needs to run with host networking in order to send the broadcasts correctly!
+*Note:* Container needs to run with host networking in order to send the broadcast packets correctly!
 
 ### Environment Variables
 
