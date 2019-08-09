@@ -35,13 +35,13 @@ docker pull seanauff/wol-proxy:[tag]
 Start the container with all default environment variables:
 
 ```shell
-docker run -d --net=host seanauff/wol-proxy:[tag]
+docker run -d --net=host --name=metermon seanauff/wol-proxy:[tag]
 ```
 
 Start the container with modified environment variables:
 
 ```shell
-docker run -d --net=host -e MQTT_BROKER_HOST=[host] -e WOL_BROADCAST_ADDR=[broadcast] seanauff/wol-proxy:[tag]
+docker run -d --net=host --name=metermon -e MQTT_BROKER_HOST=[host] -e WOL_BROADCAST_ADDR=[broadcast] seanauff/wol-proxy:[tag]
 ```
 
 ### Environment Variables
