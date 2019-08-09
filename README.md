@@ -6,11 +6,11 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
 ## Usage
 
-1. Have a MQTT broker you can connect to. I use [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto)
+1. Have a MQTT broker you can connect to. I use [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto).
 
 2. Run the container or script using instructions below.
 
-3. Publish to the mqtt topic, `WOL-proxy/command`, with the MAC address of the computer you wish to wake. The following formats are all acceptable: `ab-cd-ef-01-23-45`, `ab:cd:ef:01:23:45`, `ab.cd.ef.01.23.45`, `abcdef012345`
+3. Publish to the mqtt topic, `WOL-proxy/command`, with the MAC address of the computer you wish to wake. The following formats are acceptable: `ab-cd-ef-01-23-45`, `ab:cd:ef:01:23:45`, `ab.cd.ef.01.23.45`, `abcdef012345`.
 
 ### Status Messages
 
