@@ -1,7 +1,20 @@
 # Example configuration.yaml entry
 switch:
+  # template switch that combines the mqtt switch and a binary sensor
+  - platform: template
+    switches:
+      computer:
+        friendly_name: "Computer"
+        value_template: "{{ is_state('binary_sensor.computer', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.computer_wol_proxy
+        #turn_off: # define your own action to turn off, or leave commented out
+
+  # MQTT switch that controls WOL-proxy
   - platform: mqtt
-    name: "Computer"
+    name: "Computer-WOL-proxy"
     command_topic: "WOL-proxy/command"
     availability_topic: "WOL-proxy/status"
     payload_on: "ab-cd-ef-01-23-45"
@@ -11,3 +24,11 @@ switch:
     optimistic: true
     qos: 0
     retain: false
+
+binary_sensor:
+  # sensor that pings the computer to determine if it is on or off
+  - platform: ping
+    name: "Computer"
+    host: [IP address of computer]
+    count: 3
+    scan_interval: 15
