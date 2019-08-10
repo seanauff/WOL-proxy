@@ -10,7 +10,11 @@ switch:
           service: switch.turn_on
           data:
             entity_id: switch.computer_wol_proxy
-        #turn_off: # define your own action to turn off, or leave commented out
+        turn_off: # can also add your own turn off service here
+          service: system_log.write
+          data:
+            message: "Computer does not support turning off"
+            level: warning
 
   # MQTT switch that controls WOL-proxy
   - platform: mqtt
