@@ -14,11 +14,11 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
    By default, WOL-proxy accepts messages on the `WOL-proxy/command` mqtt topic. The `WOL-proxy` prefix can be changed by setting the `MQTT_TOPIC_PREFIX` environment variable. WOL-proxy will then listen for messages on `[MQTT_TOPIC_PREFIX]/command`. Note that adding a trailing `/` to `MQTT_TOPIC_PREFIX` will create an empty level.
 
-   |Value of MQTT_TOPIC_PREFIX|mqtt output topic|
+   |Value of MQTT_TOPIC_PREFIX|mqtt command topic|
    |--------------------------|-----------------|
-   |`WOL-proxy`                |`WOL-proxy/output`|
-   |`switches/remoteLAN`          |`switches/remoteLAN/output`|
-   |`switches/remoteLAN/`         |`switches/remoteLAN//output`|
+   |`WOL-proxy`                |`WOL-proxy/command`|
+   |`switches/remoteLAN`          |`switches/remoteLAN/command`|
+   |`switches/remoteLAN/`         |`switches/remoteLAN//command`|
 
 ### Status Messages
 
