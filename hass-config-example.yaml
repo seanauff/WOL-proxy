@@ -1,0 +1,13 @@
+# Example configuration.yaml entry
+switch:
+  - platform: mqtt
+    name: "Computer"
+    command_topic: "WOL-proxy/command"
+    availability_topic: "WOL-proxy/status"
+    payload_on: "ab-cd-ef-01-23-45"
+    # payload_off: "OFF" # this does nothing
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    optimistic: true
+    qos: 0
+    retain: false

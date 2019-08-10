@@ -10,7 +10,7 @@ The script can be run using docker (takes care of all dependencies) or standalon
 
 2. Run the container or script using instructions below.
 
-3. Publish to the mqtt topic, `WOL-proxy/command`, with the MAC address of the computer you wish to wake. The following formats are acceptable: `ab-cd-ef-01-23-45`, `ab:cd:ef:01:23:45`, `ab.cd.ef.01.23.45`, `abcdef012345`.
+3. Publish to the mqtt topic, `WOL-proxy/command`, with the MAC address of the computer you wish to wake. The following formats are acceptable: `ab-cd-ef-01-23-45`, `ab:cd:ef:01:23:45`, `ab.cd.ef.01.23.45`, `abcdef012345`. An [example Home Assistant config](/hass-config-example.yaml) is provided.
 
    By default, WOL-proxy accepts messages on the `WOL-proxy/command` mqtt topic. The `WOL-proxy` prefix can be changed by setting the `MQTT_TOPIC_PREFIX` environment variable. WOL-proxy will then listen for messages on `[MQTT_TOPIC_PREFIX]/command`. Note that adding a trailing `/` to `MQTT_TOPIC_PREFIX` will create an empty level.
 
