@@ -1,0 +1,10 @@
+version: "2"
+services:
+  wol-proxy:
+    image: seanauff/wol-proxy:arm
+    container_name: wol-proxy
+    network_mode: host
+    environment:
+      - MQTT_BROKER_HOST=192.168.1.8
+      - WOL_BROADCAST_ADDR=192.168.20.255
+    restart: unless-stopped
