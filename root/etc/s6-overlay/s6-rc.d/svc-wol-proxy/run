@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+echo "Starting WOL-proxy"
+
+exec \
+    cd /app s6-setuidgid abc python3 WOL-proxy.py

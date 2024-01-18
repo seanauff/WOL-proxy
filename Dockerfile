@@ -1,9 +1,11 @@
-FROM python:3-slim-buster
+FROM lsiobase/alpine:3.19
 
-WORKDIR /usr/src/app
+ENV \
+    PATH="/pyvenv/bin:${PATH}"
 
-RUN pip install paho-mqtt wakeonlan
+RUN apk add python3 && \
+    python3 -m venv /pyvenv && \
+    pip3 install paho-mqtt wakeonlan
 
-ADD WOL-proxy.py .
-
-ENTRYPOINT ["python", "./WOL-proxy.py"]
+COPY root /
+COPY WOL-proxy.py /app
