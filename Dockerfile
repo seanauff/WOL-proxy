@@ -6,4 +6,4 @@ RUN pip install paho-mqtt wakeonlan
 
 ADD WOL-proxy.py .
 
-ENTRYPOINT ["python", "./WOL-proxy.py"]
+ENTRYPOINT ["python", "-u", "./WOL-proxy.py"]
