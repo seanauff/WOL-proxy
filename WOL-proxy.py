@@ -16,21 +16,21 @@ WOL_BROADCAST_ADDR = os.getenv('WOL_BROADCAST_ADDR',"255.255.255.255")
 #print("All env vars read.")
 
 # The callback for when the client receives a CONNACK response from the server.
-def on_connect(client, userdata, flags, rc):
-    print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with result code {rc}: "+mqtt.connack_string(rc))
+def on_connect(client, userdata, flags, reason_code, properties):
+    print(f"Connected to broker at {MQTT_BROKER_HOST}:{MQTT_BROKER_PORT} with reason code {reason_code}: "+mqtt.connack_string(reason_code))
 
     client.publish(MQTT_TOPIC_PREFIX+"/status",payload="Online",qos=1,retain=True)
 
     # subscribe to command topic
     client.subscribe(MQTT_TOPIC_PREFIX+"/command", MQTT_QOS)
 
-def on_subscribe(client, userdata, mid, granted_qos):
-    print(f"Subscribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {granted_qos[0]}.")
+def on_subscribe(client, userdata, mid, reason_code, properties):
+    print(f"Subscribed to commands on topic \"{MQTT_TOPIC_PREFIX}/command\" with QOS {reason_code[0]}.")
     print(f"Wake-On-LAN proxy service started.")  
 
-def on_disconnect(client, userdata, rc):
-    if rc != 0:
-        print(f"Unexpected disconnection from broker (RC={rc}). Attempting to reconnect...")
+def on_disconnect(client, userdata, flags, reason_code, properties):
+    if reason_code != 0:
+        print(f"Unexpected disconnection from broker (RC={reason_code}). Attempting to reconnect...")
 
 # callback for when the client receives a message on the subscribed topic
 def on_message(client, userdata, message):
@@ -43,7 +43,7 @@ def on_message(client, userdata, message):
         print(f"Message payload has invalid mac address format!")
 
 # set up mqtt client
-client = mqtt.Client(client_id=MQTT_CLIENT_ID)
+client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2,client_id=MQTT_CLIENT_ID)
 if MQTT_USERNAME and MQTT_PASSWORD:
     client.username_pw_set(MQTT_USERNAME,MQTT_PASSWORD)
     print("Username and password set.")
