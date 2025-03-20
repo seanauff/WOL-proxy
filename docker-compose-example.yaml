@@ -1,7 +1,7 @@
 version: "2"
 services:
   wol-proxy:
-    image: seanauff/wol-proxy:arm
+    image: ghcr.io/seanauff/wol-proxy:latest
     container_name: wol-proxy
     network_mode: host
     environment:

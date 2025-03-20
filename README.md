@@ -29,19 +29,19 @@ WOL-proxy will report its status on the `[MQTT_TOPIC_PREFIX]/status` topic via r
 Pull the image. The `latest` tag has multiarch support, so it should pull the correct image for your system.
 
 ```shell
-docker pull seanauff/wol-proxy
+docker pull ghcr.io/seanauff/wol-proxy
 ```
 
 Start the container with all default environment variables:
 
 ```shell
-docker run -d --net=host --name=WOL-proxy seanauff/wol-proxy
+docker run -d --net=host --name=WOL-proxy ghcr.io/seanauff/wol-proxy
 ```
 
 Start the container with modified environment variables:
 
 ```shell
-docker run -d --net=host --name=WOL-proxy -e MQTT_BROKER_HOST=<host> -e WOL_BROADCAST_ADDR=<broadcast> seanauff/wol-proxy
+docker run -d --net=host --name=WOL-proxy -e MQTT_BROKER_HOST=<host> -e WOL_BROADCAST_ADDR=<broadcast> ghcr.io/seanauff/wol-proxy
 ```
 
 *Note:* Container needs to run with host networking in order to send the broadcast packets correctly!
